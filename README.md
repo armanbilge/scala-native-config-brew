@@ -28,3 +28,11 @@ An additional plugin makes available a `nativeBrewInstallWorkflowStep` for use w
 ```scala
 addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew-github-actions" % "<version>")
 ```
+
+### Mill
+
+The core logic is published for Scala 2.12, 2.13, and 3, independently of sbt. This should facilitate the development of a Mill plugin.
+
+```
+com.armanbilge::scala-native-config-brew:<version>
+```
