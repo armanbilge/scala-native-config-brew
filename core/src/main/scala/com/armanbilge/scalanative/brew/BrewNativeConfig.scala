@@ -36,8 +36,8 @@ final class BrewNativeConfig private (cellar: Path, formulas: List[ResolvedFormu
   def ldLibraryPath: String = libDirs.mkString(":")
 
   private def dirs = formulas.map(_.locate(cellar))
-  private def includeDirs = dirs.map(_.resolve("include"))
-  private def libDirs = dirs.map(_.resolve("lib"))
+  private def includeDirs = dirs.map(_.resolve("include")).filter(_.toFile.exists())
+  private def libDirs = dirs.map(_.resolve("lib")).filter(_.toFile.exists())
 }
 
 object BrewNativeConfig {
