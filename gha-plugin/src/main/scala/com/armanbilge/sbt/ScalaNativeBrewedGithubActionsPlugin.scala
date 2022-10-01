@@ -32,6 +32,8 @@ object ScalaNativeBrewedGithubActionsPlugin extends AutoPlugin {
   object autoImport {
     lazy val nativeBrewInstallWorkflowSteps =
       settingKey[Seq[WorkflowStep]]("Workflow step that installs all the necessary formulae")
+    lazy val nativeBrewInstallCond =
+      settingKey[Option[String]]("Condition for brew install steps")
   }
 
   import autoImport._
@@ -40,11 +42,14 @@ object ScalaNativeBrewedGithubActionsPlugin extends AutoPlugin {
 
   override def buildSettings: Seq[Setting[_]] = Seq(
     nativeBrewAllTheFormulas := Set.empty,
+    nativeBrewInstallCond := None,
     nativeBrewInstallWorkflowSteps := {
       val oses = githubWorkflowOSes.value
       val formulas = nativeBrewAllTheFormulas.value.toList.sorted
 
       val linuxBrew = "/home/linuxbrew/.linuxbrew/bin/brew"
+
+      val extraCond = nativeBrewInstallCond.value.fold("")(cond => s"($cond) && ")
 
       val ubuntuStep =
         if (oses.exists(_.contains("ubuntu")))
@@ -52,7 +57,7 @@ object ScalaNativeBrewedGithubActionsPlugin extends AutoPlugin {
             WorkflowStep.Run(
               List(s"$linuxBrew install ${formulas.mkString(" ")}"),
               name = Some("Install brew formulae (ubuntu)"),
-              cond = Some("startsWith(matrix.os, 'ubuntu')")
+              cond = Some(s"${extraCond}startsWith(matrix.os, 'ubuntu')")
             )
           )
         else Nil
@@ -63,7 +68,7 @@ object ScalaNativeBrewedGithubActionsPlugin extends AutoPlugin {
             WorkflowStep.Run(
               List(s"brew install ${formulas.mkString(" ")}"),
               name = Some("Install brew formulae (macOS)"),
-              cond = Some("startsWith(matrix.os, 'macos')")
+              cond = Some(s"${extraCond}startsWith(matrix.os, 'macos')")
             )
           )
         else Nil
