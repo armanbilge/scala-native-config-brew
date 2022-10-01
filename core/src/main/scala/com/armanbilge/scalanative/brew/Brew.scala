@@ -31,10 +31,12 @@ final class Brew private (bin: String) {
   def cellar(): Path = Paths.get(Process(List(bin, "--cellar")).!!.trim())
 
   def info(formulas: List[String]): List[FormulaInfo] =
-    jawn
-      .decode[List[FormulaInfo]](Process(List(bin, "info", "--json") ++ formulas).!!)
-      .toTry
-      .get
+    if (formulas.nonEmpty)
+      jawn
+        .decode[List[FormulaInfo]](Process(List(bin, "info", "--json") ++ formulas).!!)
+        .toTry
+        .get
+    else Nil
 
 }
 
