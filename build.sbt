@@ -12,13 +12,11 @@ ThisBuild / githubWorkflowOSes :=
 ThisBuild / githubWorkflowBuildSbtStepPreamble := Seq()
 
 ThisBuild / githubWorkflowBuildPreamble += {
-  val isLinux = Option(System.getProperty("os.name")).exists(_.toLowerCase().contains("linux"))
-  val brew =
-    if (isLinux) "/home/linuxbrew/.linuxbrew/bin/brew"
-    else "brew"
+  val brew = "/home/linuxbrew/.linuxbrew/bin/brew"
   WorkflowStep.Run(
     List(s"$brew install curl"),
-    name = Some("Install curl")
+    name = Some("Install curl"),
+    cond = Some("startsWith(matrix.os, 'ubuntu')")
   )
 }
 
