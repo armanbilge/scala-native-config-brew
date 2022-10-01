@@ -6,7 +6,21 @@ ThisBuild / developers += tlGitHubDev("armanbilge", "Arman Bilge")
 ThisBuild / startYear := Some(2022)
 ThisBuild / tlSonatypeUseLegacyHost := false
 
+ThisBuild / githubWorkflowOSes :=
+  Seq("ubuntu-20.04", "ubuntu-22.04", "macos-11", "macos-12")
+
 ThisBuild / githubWorkflowBuildSbtStepPreamble := Seq()
+
+ThisBuild / githubWorkflowBuildPreamble += {
+  val isLinux = Option(System.getProperty("os.name")).exists(_.toLowerCase().contains("linux"))
+  val brew =
+    if (isLinux) "/home/linuxbrew/.linuxbrew/bin/brew"
+    else "brew"
+  WorkflowStep.Run(
+    List(s"$brew install curl"),
+    name = Some("Install curl")
+  )
+}
 
 val scala2_12 = "2.12.16"
 val scala2_13 = "2.13.8"
