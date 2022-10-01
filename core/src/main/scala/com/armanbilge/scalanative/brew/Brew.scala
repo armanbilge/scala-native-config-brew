@@ -28,7 +28,7 @@ import Brew._
 
 final class Brew private (bin: String) {
 
-  def cellar(): Path = Paths.get(Process(List(bin, "--cellar")).!!)
+  def cellar(): Path = Paths.get(Process(List(bin, "--cellar")).!!.trim())
 
   def info(formulas: List[String]): List[FormulaInfo] =
     jawn
