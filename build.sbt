@@ -22,7 +22,7 @@ ThisBuild / githubWorkflowBuildPreamble += {
 
 val scala2_12 = "2.12.16"
 val scala2_13 = "2.13.8"
-val scala3 = "3.1.3"
+val scala3 = "3.2.0"
 val scalaNativeVersion = "0.4.7"
 
 lazy val root = project.in(file(".")).aggregate(core2_12, core2_13, core3, sbtPlugin, ghaPlugin)
