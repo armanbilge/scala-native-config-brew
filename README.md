@@ -36,7 +36,7 @@ ThisBuild / githubWorkflowBuildPreamble ++= nativeBrewInstallWorkflowSteps.value
 The core logic is published for Scala 2.12, 2.13, and 3, independently of sbt. This should facilitate the development of a Mill plugin.
 
 ```
-com.armanbilge::scala-native-config-brew:<version>
+com.armanbilge::scala-native-config-brew:0.1.0
 ```
 
 ### See also
