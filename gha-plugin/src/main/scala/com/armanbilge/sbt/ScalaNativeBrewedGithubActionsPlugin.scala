@@ -36,13 +36,13 @@ object ScalaNativeBrewedGithubActionsPlugin extends AutoPlugin {
 
   import autoImport._
 
-  private val allTheFormulas = settingKey[Set[String]]("All the formulae")
+  private val nativeBrewAllTheFormulas = settingKey[Set[String]]("All the formulae")
 
   override def buildSettings: Seq[Setting[_]] = Seq(
-    allTheFormulas := Set.empty,
+    nativeBrewAllTheFormulas := Set.empty,
     nativeBrewInstallWorkflowSteps := {
       val oses = githubWorkflowOSes.value
-      val formulas = allTheFormulas.value.toList.sorted
+      val formulas = nativeBrewAllTheFormulas.value.toList.sorted
 
       val linuxBrew = "/home/linuxbrew/.linuxbrew/bin/brew"
 
@@ -78,7 +78,7 @@ object ScalaNativeBrewedGithubActionsPlugin extends AutoPlugin {
       inConfig(IntegrationTest)(perConfigSettings)
 
   private def perConfigSettings = Seq(
-    ThisBuild / allTheFormulas ++= nativeBrewFormulas.value
+    ThisBuild / Zero / nativeBrewAllTheFormulas ++= nativeBrewFormulas.value
   )
 
 }
