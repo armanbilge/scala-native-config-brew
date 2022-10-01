@@ -21,7 +21,7 @@ The plugin has two additional requirements:
 
 Future releases may introduce capabilities to automatically install formulae and self-bootstrap without an existing brew installation. Please open an issue if these features are important to you.
 
-### GitHub 
+### GitHub Actions
 
 An additional plugin makes available a `nativeBrewInstallWorkflowStep` for use with [sbt-typelevel-github-actions](https://typelevel.org/sbt-typelevel/gha.html).
 
