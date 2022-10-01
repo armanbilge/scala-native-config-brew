@@ -23,10 +23,12 @@ Future releases may introduce capabilities to automatically install formulae and
 
 ### GitHub Actions
 
-An additional plugin makes available a `nativeBrewInstallWorkflowSteps` for use with [sbt-typelevel-github-actions](https://typelevel.org/sbt-typelevel/gha.html).
+An additional plugin integrates with [sbt-typelevel-github-actions](https://typelevel.org/sbt-typelevel/gha.html).
 
 ```scala
 addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew-github-actions" % "<version>")
+
+ThisBuild / githubWorkflowBuildPreamble ++= nativeBrewInstallWorkflowSteps.value
 ```
 
 ### Mill
