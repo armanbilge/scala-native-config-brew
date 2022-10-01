@@ -62,7 +62,7 @@ object ScalaNativeBrewedConfigPlugin extends AutoPlugin {
             val formulas = nativeBrewFormulas.value.mkString(", ")
             log.warn(s"Cannot find brew-installed $formulas.")
             log.warn(
-              s"nativeCompileOptions and nativeLinkingOptions must be manually configured."
+              s"nativeCompileOptions and nativeLinkingOptions will not be auto-configured."
             )
             oldConfig
         }
@@ -78,7 +78,7 @@ object ScalaNativeBrewedConfigPlugin extends AutoPlugin {
           case Failure(_) =>
             val formulas = nativeBrewFormulas.value.mkString(", ")
             log.warn(s"Cannot find brew-installed $formulas.")
-            log.warn(s"LD_LIBRARY_PATH must be manually configured.")
+            log.warn(s"LD_LIBRARY_PATH will not be auto-configured.")
             oldEnv
         }
       }
