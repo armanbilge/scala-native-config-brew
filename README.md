@@ -5,7 +5,7 @@
 ### Install
 
 ```scala
-addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew" % "<version>")
+addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew" % "0.1.0")
 ```
 
 ### Usage
@@ -26,7 +26,7 @@ Future releases may introduce capabilities to automatically install formulae and
 An additional plugin integrates with [sbt-typelevel-github-actions](https://typelevel.org/sbt-typelevel/gha.html).
 
 ```scala
-addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew-github-actions" % "<version>")
+addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew-github-actions" % "0.1.0")
 
 ThisBuild / githubWorkflowBuildPreamble ++= nativeBrewInstallWorkflowSteps.value
 ```
@@ -38,3 +38,7 @@ The core logic is published for Scala 2.12, 2.13, and 3, independently of sbt. T
 ```
 com.armanbilge::scala-native-config-brew:<version>
 ```
+
+### See also
+
+The much more ambitious [sbt-vcpkg](sbt-vcpkg) project.
