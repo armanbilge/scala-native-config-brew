@@ -16,13 +16,17 @@
 
 package com.armanbilge.sbt
 
-import scala.scalanative.sbtplugin.ScalaNativePlugin
-
-import ScalaNativePlugin.autoImport._
-import sbt._
-import sbt.Keys._
 import com.armanbilge.scalanative.brew.Brew
 import com.armanbilge.scalanative.brew.BrewNativeConfig
+import sbt.Keys._
+import sbt._
+
+import scala.scalanative.sbtplugin.ScalaNativePlugin
+import scala.util.Failure
+import scala.util.Success
+import scala.util.Try
+
+import ScalaNativePlugin.autoImport._
 
 object ScalaNativeBrewedConfigPlugin extends AutoPlugin {
 
@@ -49,19 +53,43 @@ object ScalaNativeBrewedConfigPlugin extends AutoPlugin {
 
   private def perConfigSettings =
     Seq(
-      nativeConfig := brewNativeConfig.value(nativeConfig.value),
+      nativeConfig := {
+        val log = streams.value.log
+        val oldConfig = nativeConfig.value
+        brewNativeConfig.value match {
+          case Success(configurator) => configurator.apply(oldConfig)
+          case Failure(_) =>
+            val formulas = nativeBrewFormulas.value.mkString(", ")
+            log.warn(s"Cannot find brew-installed $formulas.")
+            log.warn(
+              s"nativeCompileOptions and nativeLinkingOptions must be manually configured."
+            )
+            oldConfig
+        }
+      },
       envVars := {
-        val brewLdLibPath = brewNativeConfig.value.ldLibraryPath
+        val log = streams.value.log
         val oldEnv = envVars.value
-        val oldLdLibPath = oldEnv.get("LD_LIBRARY_PATH")
-        val newLdLibPath = oldLdLibPath.fold(brewLdLibPath)(old => s"$old:$brewLdLibPath")
-        oldEnv.updated("LD_LIBRARY_PATH", newLdLibPath)
+        brewNativeConfig.value.map(_.ldLibraryPath) match {
+          case Success(brewLdLibPath) =>
+            val oldLdLibPath = oldEnv.get("LD_LIBRARY_PATH")
+            val newLdLibPath = oldLdLibPath.fold(brewLdLibPath)(old => s"$old:$brewLdLibPath")
+            oldEnv.updated("LD_LIBRARY_PATH", newLdLibPath)
+          case Failure(_) =>
+            val formulas = nativeBrewFormulas.value.mkString(", ")
+            log.warn(s"Cannot find brew-installed $formulas.")
+            log.warn(s"LD_LIBRARY_PATH must be manually configured.")
+            oldEnv
+        }
       }
     )
 
   private lazy val brewNativeConfig =
-    Def.task[BrewNativeConfig](BrewNativeConfig(brew.value, nativeBrewFormulas.value.toList))
+    Def.task[Try[BrewNativeConfig]](
+      brew.value.flatMap(brew => Try(BrewNativeConfig(brew, nativeBrewFormulas.value.toList)))
+    )
 
-  private lazy val brew = Def.task[Brew](nativeBrew.value.fold(Brew())(Brew(_)))
+  private lazy val brew =
+    Def.task[Try[Brew]](nativeBrew.value.fold(Try(Brew()))(bin => Try(Brew(bin))))
 
 }
