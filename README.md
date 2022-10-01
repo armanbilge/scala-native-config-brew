@@ -5,7 +5,7 @@
 ### Install
 
 ```scala
-addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew" % "0.1.0")
+addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew" % "0.1.2")
 ```
 
 ### Usage
@@ -28,7 +28,7 @@ Future releases may introduce capabilities to automatically install formulae and
 An additional plugin integrates with [sbt-typelevel-github-actions](https://typelevel.org/sbt-typelevel/gha.html).
 
 ```scala
-addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew-github-actions" % "0.1.0")
+addSbtPlugin("com.armanbilge" % "sbt-scala-native-config-brew-github-actions" % "0.1.2")
 
 ThisBuild / githubWorkflowBuildPreamble ++= nativeBrewInstallWorkflowSteps.value
 ```
@@ -38,7 +38,7 @@ ThisBuild / githubWorkflowBuildPreamble ++= nativeBrewInstallWorkflowSteps.value
 The core logic is published for Scala 2.12, 2.13, and 3, independently of sbt. This should facilitate the development of a Mill plugin.
 
 ```
-com.armanbilge::scala-native-config-brew:0.1.0
+com.armanbilge::scala-native-config-brew:0.1.2
 ```
 
 ### See also
