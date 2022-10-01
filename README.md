@@ -19,6 +19,8 @@ The plugin has two additional requirements:
 1. brew is already installed in your system. Use the `nativeBrew` setting to point it at a non-default location.
 2. The desired formulae have already been installed. The plugin will not install them for you; it only configures Scala Native to use an existing installation.
 
+However, these are only soft requirements: if brew or the requested formulae are not installed, the plugin will log a warning and not update any configuration. So it will not interfere with a user who does not have or want brew.
+
 Future releases may introduce capabilities to automatically install formulae and self-bootstrap without an existing brew installation. Please open an issue if these features are important to you.
 
 ### GitHub Actions
