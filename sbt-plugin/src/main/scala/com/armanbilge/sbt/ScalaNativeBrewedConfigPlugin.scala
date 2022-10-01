@@ -60,8 +60,8 @@ object ScalaNativeBrewedConfigPlugin extends AutoPlugin {
     )
 
   private lazy val brewNativeConfig =
-    Def.setting[BrewNativeConfig](BrewNativeConfig(brew.value, nativeBrewFormulas.value.toList))
+    Def.task[BrewNativeConfig](BrewNativeConfig(brew.value, nativeBrewFormulas.value.toList))
 
-  private lazy val brew = Def.setting[Brew](nativeBrew.value.fold(Brew())(Brew(_)))
+  private lazy val brew = Def.task[Brew](nativeBrew.value.fold(Brew())(Brew(_)))
 
 }
