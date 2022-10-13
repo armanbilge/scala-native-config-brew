@@ -21,11 +21,14 @@ ThisBuild / githubWorkflowBuildPreamble += {
 }
 
 val scala2_12 = "2.12.16"
-val scala2_13 = "2.13.8"
+val scala2_13 = "2.13.10"
 val scala3 = "3.1.3"
 val scalaNativeVersion = "0.4.7"
 
-lazy val root = project.in(file(".")).aggregate(core2_12, core2_13, core3, sbtPlugin, ghaPlugin)
+lazy val root = project
+  .in(file("."))
+  .aggregate(core2_12, core2_13, core3, sbtPlugin, ghaPlugin)
+  .enablePlugins(NoPublishPlugin)
 
 lazy val core = projectMatrix
   .in(file("core"))
@@ -66,5 +69,5 @@ lazy val ghaPlugin = project
   .dependsOn(sbtPlugin)
   .settings(
     name := "sbt-scala-native-config-brew-github-actions",
-    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.4.15")
+    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.4.16")
   )
