@@ -69,5 +69,5 @@ lazy val ghaPlugin = project
   .dependsOn(sbtPlugin)
   .settings(
     name := "sbt-scala-native-config-brew-github-actions",
-    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.4.16")
+    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.4.17")
   )
