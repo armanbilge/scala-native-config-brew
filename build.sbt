@@ -7,7 +7,7 @@ ThisBuild / startYear := Some(2022)
 ThisBuild / tlSonatypeUseLegacyHost := false
 
 ThisBuild / githubWorkflowOSes :=
-  Seq("ubuntu-20.04", "ubuntu-22.04", "macos-11", "macos-12")
+  Seq("ubuntu-22.04", "macos-11", "macos-12")
 
 ThisBuild / githubWorkflowBuildSbtStepPreamble := Seq()
 
