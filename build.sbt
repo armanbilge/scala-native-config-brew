@@ -36,7 +36,7 @@ lazy val core = projectMatrix
     name := "scala-native-config-brew",
     libraryDependencies ++= Seq(
       "org.scala-native" %% "tools" % scalaNativeVersion,
-      "io.circe" %% "circe-jawn" % "0.14.3"
+      "io.circe" %% "circe-jawn" % "0.14.4"
     )
   )
   .defaultAxes(VirtualAxis.jvm)
