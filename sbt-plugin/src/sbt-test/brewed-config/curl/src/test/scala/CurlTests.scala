@@ -8,7 +8,7 @@ import curl._
 class CurlTests {
 
   @Test def testVersion(): Unit = {
-    val prefix = "libcurl/7."
+    val prefix = "libcurl/8."
     assertEquals(prefix, fromCString(curl_version()).take(prefix.length))
   }
 
