@@ -23,7 +23,7 @@ ThisBuild / githubWorkflowBuildPreamble += {
 val scala2_12 = "2.12.17"
 val scala2_13 = "2.13.10"
 val scala3 = "3.2.2"
-val scalaNativeVersion = "0.4.12"
+val scalaNativeVersion = "0.4.14"
 
 lazy val root = project
   .in(file("."))
