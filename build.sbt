@@ -21,7 +21,7 @@ ThisBuild / githubWorkflowBuildPreamble += {
 }
 
 val scala2_12 = "2.12.18"
-val scala2_13 = "2.13.10"
+val scala2_13 = "2.13.11"
 val scala3 = "3.3.0"
 val scalaNativeVersion = "0.4.12"
 
