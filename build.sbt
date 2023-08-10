@@ -1,4 +1,4 @@
-ThisBuild / tlBaseVersion := "0.1"
+ThisBuild / tlBaseVersion := "0.2"
 
 ThisBuild / organization := "com.armanbilge"
 ThisBuild / organizationName := "Arman Bilge"
@@ -69,5 +69,5 @@ lazy val ghaPlugin = project
   .dependsOn(sbtPlugin)
   .settings(
     name := "sbt-scala-native-config-brew-github-actions",
-    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.4.22")
+    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.5.0-RC11")
   )
