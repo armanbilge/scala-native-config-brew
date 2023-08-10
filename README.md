@@ -43,4 +43,4 @@ com.armanbilge::scala-native-config-brew:0.1.2
 
 ### See also
 
-The much more ambitious [sbt-vcpkg](https://github.com/indoorvivants/sbt-vcpkg/) project.
+The much more ambitious [sn-vcpkg](https://github.com/indoorvivants/sn-vcpkg) project.
