@@ -21,6 +21,8 @@ import org.typelevel.sbt.gha.GenerativePlugin
 import org.typelevel.sbt.gha.WorkflowStep
 import sbt._
 
+import scala.annotation.nowarn
+
 import ScalaNativeBrewedConfigPlugin.autoImport._
 
 object ScalaNativeBrewedGithubActionsPlugin extends AutoPlugin {
@@ -80,7 +82,7 @@ object ScalaNativeBrewedGithubActionsPlugin extends AutoPlugin {
   override def projectSettings: Seq[Setting[_]] =
     inConfig(Compile)(perConfigSettings) ++
       inConfig(Test)(perConfigSettings) ++
-      inConfig(IntegrationTest)(perConfigSettings)
+      inConfig(IntegrationTest)(perConfigSettings): @nowarn("cat=deprecation")
 
   private def perConfigSettings = Seq(
     ThisBuild / Zero / nativeBrewAllTheFormulas ++= nativeBrewFormulas.value
