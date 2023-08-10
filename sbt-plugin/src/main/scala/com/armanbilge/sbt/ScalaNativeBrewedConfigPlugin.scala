@@ -21,6 +21,7 @@ import com.armanbilge.scalanative.brew.BrewNativeConfig
 import sbt.Keys._
 import sbt._
 
+import scala.annotation.nowarn
 import scala.scalanative.sbtplugin.ScalaNativePlugin
 import scala.util.Failure
 import scala.util.Success
@@ -49,7 +50,7 @@ object ScalaNativeBrewedConfigPlugin extends AutoPlugin {
   override def projectSettings: Seq[Setting[_]] =
     inConfig(Compile)(perConfigSettings) ++
       inConfig(Test)(perConfigSettings) ++
-      inConfig(IntegrationTest)(perConfigSettings)
+      inConfig(IntegrationTest)(perConfigSettings): @nowarn("cat=deprecation")
 
   private def perConfigSettings =
     Seq(
