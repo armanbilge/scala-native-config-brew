@@ -22,7 +22,7 @@ ThisBuild / githubWorkflowBuildPreamble += {
 
 val scala2_12 = "2.12.18"
 val scala2_13 = "2.13.11"
-val scala3 = "3.3.0"
+val scala3 = "3.3.1"
 val scalaNativeVersion = "0.4.14"
 
 lazy val root = project
@@ -36,7 +36,7 @@ lazy val core = projectMatrix
     name := "scala-native-config-brew",
     libraryDependencies ++= Seq(
       "org.scala-native" %% "tools" % scalaNativeVersion,
-      "io.circe" %% "circe-jawn" % "0.14.5"
+      "io.circe" %% "circe-jawn" % "0.14.6"
     )
   )
   .defaultAxes(VirtualAxis.jvm)
@@ -69,5 +69,5 @@ lazy val ghaPlugin = project
   .dependsOn(sbtPlugin)
   .settings(
     name := "sbt-scala-native-config-brew-github-actions",
-    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.5.0-RC11")
+    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.5.4")
   )
