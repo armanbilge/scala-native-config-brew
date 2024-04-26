@@ -9,6 +9,8 @@ ThisBuild / tlSonatypeUseLegacyHost := false
 ThisBuild / githubWorkflowOSes :=
   Seq("ubuntu-22.04", "macos-12", "macos-13", "macos-14")
 
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"))
+
 ThisBuild / githubWorkflowBuildSbtStepPreamble := Seq()
 
 ThisBuild / githubWorkflowBuildPreamble += {
