@@ -21,7 +21,7 @@ import io.circe.jawn
 
 import java.nio.file.Path
 import java.nio.file.Paths
-import scala.scalanative.build.Platform
+import java.util.Locale
 import scala.sys.process._
 
 import Brew._
@@ -43,15 +43,18 @@ final class Brew private (bin: String) {
 object Brew {
 
   def apply(): Brew = {
+    val osUsed =
+      System.getProperty("os.name", "unknown").toLowerCase(Locale.ROOT)
+
     val bin =
-      if (Platform.isMac) {
+      if (osUsed.contains("mac")) {
         val isArm =
           Option(System.getProperty("os.arch")).exists(_.toLowerCase().contains("aarch64"))
         if (isArm)
           "/opt/homebrew/bin/brew"
         else
           "/usr/local/bin/brew"
-      } else if (Platform.isLinux) "/home/linuxbrew/.linuxbrew/bin/brew"
+      } else if (osUsed.contains("linux")) "/home/linuxbrew/.linuxbrew/bin/brew"
       else throw new RuntimeException("unsupported OS")
 
     apply(bin)

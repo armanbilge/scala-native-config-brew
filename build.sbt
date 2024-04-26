@@ -20,10 +20,10 @@ ThisBuild / githubWorkflowBuildPreamble += {
   )
 }
 
-val scala2_12 = "2.12.18"
-val scala2_13 = "2.13.12"
-val scala3 = "3.3.1"
-val scalaNativeVersion = "0.4.14"
+val scala2_12 = "2.12.19"
+val scala2_13 = "2.13.13"
+val scala3 = "3.3.3"
+val scalaNativeVersion = "0.4.17"
 
 lazy val root = project
   .in(file("."))
@@ -69,5 +69,5 @@ lazy val ghaPlugin = project
   .dependsOn(sbtPlugin)
   .settings(
     name := "sbt-scala-native-config-brew-github-actions",
-    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.6.2")
+    addSbtPlugin("org.typelevel" % "sbt-typelevel-github-actions" % "0.7.0")
   )
