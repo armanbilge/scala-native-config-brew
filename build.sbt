@@ -7,7 +7,7 @@ ThisBuild / startYear := Some(2022)
 ThisBuild / tlSonatypeUseLegacyHost := false
 
 ThisBuild / githubWorkflowOSes :=
-  Seq("ubuntu-22.04", "macos-12", "macos-13", "macos-14")
+  Seq("ubuntu-22.04", "macos-13", "macos-14", "macos-15")
 
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"))
 
